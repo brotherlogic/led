@@ -1,9 +1,7 @@
 package main
 
 import (
-	"flag"
-	"io/ioutil"
-	"log"
+	"time"
 
 	"github.com/brotherlogic/goserver"
 	"google.golang.org/grpc"
@@ -12,17 +10,14 @@ import (
 	pb "github.com/brotherlogic/led/proto"
 )
 
+type ledwriter interface {
+	topline(str string, d time.Duration)
+}
+
 //Server main server type
 type Server struct {
 	*goserver.GoServer
-}
-
-// Init builds the server
-func Init() *Server {
-	s := &Server{
-		&goserver.GoServer{},
-	}
-	return s
+	ledwriter ledwriter
 }
 
 // DoRegister does RPC registration
@@ -43,21 +38,4 @@ func (s *Server) Mote(master bool) error {
 // GetState gets the state of the server
 func (s *Server) GetState() []*pbg.State {
 	return []*pbg.State{}
-}
-
-func main() {
-	var quiet = flag.Bool("quiet", false, "Show all output")
-	flag.Parse()
-
-	//Turn off logging
-	if *quiet {
-		log.SetFlags(0)
-		log.SetOutput(ioutil.Discard)
-	}
-	server := Init()
-	server.PrepServer()
-	server.Register = server
-
-	server.RegisterServer("led", false)
-	server.Serve()
 }

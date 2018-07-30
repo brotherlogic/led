@@ -17,8 +17,10 @@ before_install:
   fi
 
 install:
-- go get -t -v 
+- go get -t -v -d
 
 script:
 - fgt golint $(find . | grep .go$ | grep -v led.pb.go | grep -v lib.go)
-- $HOME/gopath/bin/goveralls -service=travis-ci -ignore=led.go,lib/lib.go -package github.com/brotherlogic/led
+- go test -covermode=count -coverprofile=profile.cov -tags=maintest
+- $HOME/gopath/bin/goveralls -service=travis-ci -ignore=led.go,lib/lib.go -package github.com/brotherlogic/led -coverprofile=$HOME/gopath/src/github.com/brotherlogic/led/profile.cov
+
