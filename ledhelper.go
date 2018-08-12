@@ -15,7 +15,7 @@ import (
 type prodledwriter struct{}
 
 func (p *prodledwriter) topline(str string, d time.Duration) {
-	lib.topline(str, d)
+	lib.Topline(str, d)
 }
 
 // Init builds the server

@@ -26,7 +26,8 @@ var (
 	disable_hardware_pulsing = flag.Bool("led-no-hardware-pulse", false, "Don't use hardware pin-pulse generation.")
 )
 
-func topline(str string, d time.Duration) {
+// Topline displays the string
+func Topline(str string, d time.Duration) {
 	config := &rgbmatrix.DefaultConfig
 	config.Rows = *rows
 	config.Cols = *cols
