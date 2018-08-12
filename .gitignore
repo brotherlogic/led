@@ -2,3 +2,4 @@ led
 *~
 cli/cli
 .test
+profile.cov
