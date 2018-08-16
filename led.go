@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/brotherlogic/goserver"
+	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 
 	pbg "github.com/brotherlogic/goserver/proto"
@@ -31,7 +32,7 @@ func (s *Server) ReportHealth() bool {
 }
 
 // Mote promotes/demotes this server
-func (s *Server) Mote(master bool) error {
+func (s *Server) Mote(ctx context.Context, master bool) error {
 	return nil
 }
 
