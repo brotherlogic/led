@@ -12,7 +12,7 @@ import (
 )
 
 type ledwriter interface {
-	topline(str string, d time.Duration)
+	write(top, bot string, d time.Duration)
 }
 
 //Server main server type
