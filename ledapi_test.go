@@ -12,8 +12,8 @@ import (
 
 type testledwriter struct{}
 
-func (p *testledwriter) topline(str string, d time.Duration) {
-	log.Printf("%v for %v", str, d)
+func (p *testledwriter) write(top, bot string, d time.Duration) {
+	log.Printf("%v and %v for %v", top, bot, d)
 }
 
 func InitTestServer() *Server {
@@ -26,7 +26,7 @@ func InitTestServer() *Server {
 
 func TestDisplay(t *testing.T) {
 	s := InitTestServer()
-	_, err := s.Display(context.Background(), &pb.DisplayRequest{FullText: "blah"})
+	_, err := s.Display(context.Background(), &pb.DisplayRequest{TopLine: "blah", BottomLine: "blah2"})
 	if err != nil {
 		t.Errorf("Bad Display")
 	}

@@ -3,7 +3,8 @@ syntax = "proto3";
 package led;
 
 message DisplayRequest {
-  string full_text = 1;
+  string top_line = 1;
+  string bottom_line = 2;
 }
 
 message DisplayResponse {}

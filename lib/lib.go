@@ -50,6 +50,30 @@ func Topline(str string, d time.Duration) {
 	time.Sleep(d)
 }
 
+// Topline displays the string
+func Bottomline(str string, d time.Duration) {
+	config := &rgbmatrix.DefaultConfig
+	config.Rows = *rows
+	config.Cols = *cols
+	config.Parallel = *parallel
+	config.ChainLength = *chain
+	config.Brightness = *brightness
+	config.HardwareMapping = *hardware_mapping
+	config.ShowRefreshRate = *show_refresh
+	config.InverseColors = *inverse_colors
+	config.DisableHardwarePulsing = *disable_hardware_pulsing
+	config.PWMLSBNanoseconds = 200
+
+	m, err := rgbmatrix.NewRGBLedMatrix(config)
+	fatal(err)
+
+	c := rgbmatrix.NewCanvas(m)
+	defer c.Close()
+	addLabel(c, 0, 13+16, str)
+	c.Render()
+	time.Sleep(d)
+}
+
 func addLabel(img *rgbmatrix.Canvas, x, y int, label string) {
 	col := color.RGBA{255, 0, 0, 255}
 	point := fixed.Point26_6{fixed.Int26_6(x * 64), fixed.Int26_6(y * 64)}

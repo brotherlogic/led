@@ -14,8 +14,9 @@ import (
 
 type prodledwriter struct{}
 
-func (p *prodledwriter) topline(str string, d time.Duration) {
-	lib.Topline(str, d)
+func (p *prodledwriter) write(top string, bot string, d time.Duration) {
+	go lib.Topline(top, d)
+	go lib.Bottomline(bot, d)
 }
 
 // Init builds the server
@@ -29,7 +30,13 @@ func Init() *Server {
 
 func main() {
 	var quiet = flag.Bool("quiet", false, "Show all output")
+	var local = flag.Bool("local", true, "Run local test")
 	flag.Parse()
+
+	if *local {
+		lib.Bottomline("hello", time.Minute)
+		return
+	}
 
 	//Turn off logging
 	if *quiet {
