@@ -30,7 +30,7 @@ func Init() *Server {
 
 func main() {
 	var quiet = flag.Bool("quiet", false, "Show all output")
-	var local = flag.Bool("local", true, "Run local test")
+	var local = flag.Bool("local", false, "Run local test")
 	flag.Parse()
 
 	if *local {
