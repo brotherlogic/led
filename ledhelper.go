@@ -34,7 +34,8 @@ func main() {
 	flag.Parse()
 
 	if *local {
-		lib.Bottomline("hello", time.Minute)
+		lib.Topline("hello", time.Minute)
+		lib.Bottomline("natalie", time.Minute)
 		return
 	}
 
