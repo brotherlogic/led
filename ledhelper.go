@@ -24,6 +24,7 @@ func Init() *Server {
 	s := &Server{
 		&goserver.GoServer{},
 		&prodledwriter{},
+		int64(0),
 	}
 	return s
 }

@@ -19,6 +19,7 @@ type ledwriter interface {
 type Server struct {
 	*goserver.GoServer
 	ledwriter ledwriter
+	received  int64
 }
 
 // DoRegister does RPC registration
@@ -38,5 +39,7 @@ func (s *Server) Mote(ctx context.Context, master bool) error {
 
 // GetState gets the state of the server
 func (s *Server) GetState() []*pbg.State {
-	return []*pbg.State{}
+	return []*pbg.State{
+		&pbg.State{Key: "count", Value: s.received},
+	}
 }
