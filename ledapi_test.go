@@ -20,6 +20,7 @@ func InitTestServer() *Server {
 	s := &Server{
 		&goserver.GoServer{},
 		&testledwriter{},
+		int64(0),
 	}
 	return s
 }
