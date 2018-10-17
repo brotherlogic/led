@@ -49,5 +49,6 @@ func main() {
 	server.Register = server
 
 	server.RegisterServer("led", false)
+	server.RunSudo()
 	server.Serve()
 }
